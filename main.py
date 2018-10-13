@@ -1,5 +1,5 @@
-
+from System import System
 
 if __name__ == '__main__':
-    from User import User
-    print(User.password_validation('aBc1+'))
+    sys = System
+    sys.start_up()
