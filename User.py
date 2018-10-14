@@ -1,3 +1,5 @@
+import re
+
 class User:
     def __init__(self, new_id, username, password, email=None):
         self.id = new_id
@@ -25,11 +27,15 @@ class User:
 
     @staticmethod
     def password_validation(password):
-        import re
-        # pattern = re.compile(r'(\d+)([a-z]+)([A-Z]+)(\W+)(\S{' + str(len(password)) + '})')
-        pattern = re.compile(r'(\d+)')
-        # TODO validation not finished
-        return True
+        pattern = "^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).*$"
+        '''
+        This pattern matches a string is longer than 8 characters and contains at least one:
+            - Number
+            - Lower case letter
+            - Upper case letter
+            - Special character
+        '''
+        return re.match(pattern, password)
 
     def change_password(self, new_password):
         if User.password_validation(new_password):

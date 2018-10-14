@@ -1,11 +1,11 @@
 class Order:
-    def __init__(self, no, customer_id, product_dict, time):
+    def __init__(self, no, customer_id, product_dict, time, total_price=0, payment_status=0):
         self.order_no = no
-        self.item = product_dict
+        self.item = product_dict  # {Product: (qty, unit)}
         self.customer_id = customer_id
         self.time = time
-        self.total_price = 0
-        self.payment_status = 0
+        self.total_price = total_price
+        self.payment_status = payment_status
 
     def get_order_no(self):
         return self.order_no
@@ -36,3 +36,18 @@ class Order:
 
     def pay_bill(self):
         pass
+
+    def __len__(self):
+        return len(self.item)
+
+    def __iter__(self):
+        return iter(self.item)
+
+    def __delitem__(self, key):
+        del self.item[key]
+
+    def __setitem__(self, key, value):
+        self.item[key] = value
+
+    def __str__(self):
+        return '{},{},{},{},{},{}'.format(self.order_no, self.item, self.customer_id, self.time, self.total_price, self.payment_status)
